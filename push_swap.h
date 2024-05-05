@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 19:26:56 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/05 16:46:53 by sandre-a         ###   ########.fr       */
+/*   Created: 2024/05/03 19:27:11 by sandre-a          #+#    #+#             */
+/*   Updated: 2024/05/05 15:08:45 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-int	main(int argc, char **argv)
+# include "libft/libft.h"
+
+typedef struct s_node
 {
-	t_node	*a;
-	t_node	*b;
-	int		i;
+	int				nbr;
+	struct s_node	*node;
+	struct s_node	*next;
+	struct s_node	*prev;
+}					t_node;
 
-	if (argc < 2 || argc == 2 && !argv[1][0])
-		return (1);
-	else if (argc == 2)
-		argv = ft_split(argv[1], ' ');
-	else
-		del_arg_zero(argv, argc);
-	
-}
+void del_arg_zero(char **argv, int argc);
 
-void	del_arg_zero(char **argv, int argc)
-{
-	int i;
-
-	i = 0;
-	while (argv[i])
-	{
-		argv[i] = argv[i + 1];
-		i++;
-	}
-}
+#endif
