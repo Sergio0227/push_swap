@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:27:11 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/05 15:08:45 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:52:18 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include "libft/libft.h"
+# include <stdbool.h>
 
 typedef struct s_node
 {
@@ -23,6 +24,11 @@ typedef struct s_node
 	struct s_node	*prev;
 }					t_node;
 
-void del_arg_zero(char **argv, int argc);
+void				init_a(t_node **a, char **argv);
+void				del_arg_zero(char **argv, int argc);
+void				append_nbr(t_node **a, int nbr);
+t_node				*get_last_nbr(t_node *a);
+long				ft_atol(const char *nptr);
+bool				sorted(t_node *a);
 
 #endif
