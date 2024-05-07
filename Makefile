@@ -1,6 +1,6 @@
 SRC = 	main.c \
 		ft_atol.c
-
+		
 NAME = push_swap
 OBJS = ${SRC:.c=.o}
 CC		= cc

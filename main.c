@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:26:56 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/06 18:04:31 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/07 20:21:15 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,41 @@ int	main(int argc, char **argv)
 	else if (argc == 2)
 		argv = ft_split(argv[1], ' ');
 	else
-		del_arg_zero(argv, argc);
+		del_args(argv, argc, 0);
 	init_a(&a, argv);
-	while (a != NULL)
-	{
-		ft_printf("%d\n", a->nbr);
-		a = a->next;
-	}
+	if (argc == 2)
+		del_args(argv, argc, 1);
+	// while (a != NULL)
+	// {
+	// 	ft_printf("%d\n", a->nbr);
+	// 	a = a->next;
+	// }
 	return (0);
 }
 
-void	del_arg_zero(char **argv, int argc)
+void	del_args(char **argv, int argc, int flag)
 {
 	int	i;
 
-	i = 0;
-	while (argv[i])
+	if (!flag)
 	{
-		argv[i] = argv[i + 1];
-		i++;
+		i = 0;
+		while (argv[i])
+		{
+			argv[i] = argv[i + 1];
+			i++;
+		}
+	}
+	else
+	{
+		i = 0;
+		while (argv[i])
+		{
+			free(argv[i]);
+			argv[i] = NULL;
+			i++;
+		}
+		free(argv);
 	}
 }
 
@@ -54,7 +70,13 @@ void	init_a(t_node **a, char **argv)
 	while (*argv)
 	{
 		nbr = ft_atol(*argv);
-		append_nbr(a, (int)nbr);
+		if (!duplicated(*a, (int)nbr))
+			append_nbr(a, (int)nbr);
+		else
+		{
+			free_stack(*a);
+			break ;
+		}
 		argv++;
 	}
 }
@@ -97,4 +119,26 @@ bool	sorted(t_node *a)
 	}
 	return (true);
 }
+bool	duplicated(t_node *a, int nbr)
+{
+	if (!a)
+		return (false);
+	while (a)
+	{
+		if (a->nbr == nbr)
+			return (true);
+		a = a->next;
+	}
+	return (false);
+}
 
+void	free_stack(t_node *a)
+{
+	t_node *temp;
+	while (a)
+	{
+		temp = a->next;
+		free(a);
+		a = temp;
+	}
+}

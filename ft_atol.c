@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 15:12:43 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/06 17:07:46 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:09:59 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ long	ft_atol(const char *nptr)
 		nptr++;
 	}
 	result *= sign;
-	return ((int)result);
-}
+	return (result);
+}	
