@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:26:56 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/07 20:21:15 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/08 21:17:07 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	main(int argc, char **argv)
 {
 	t_node	*a;
 	t_node	*b;
-	int		i;
 
 	a = NULL;
 	b = NULL;
@@ -29,11 +28,10 @@ int	main(int argc, char **argv)
 	init_a(&a, argv);
 	if (argc == 2)
 		del_args(argv, argc, 1);
-	// while (a != NULL)
-	// {
-	// 	ft_printf("%d\n", a->nbr);
-	// 	a = a->next;
-	// }
+	print_stack(&a);
+	swap(&a);
+	print_stack(&a);
+	free_stack(&a);
 	return (0);
 }
 
@@ -70,11 +68,11 @@ void	init_a(t_node **a, char **argv)
 	while (*argv)
 	{
 		nbr = ft_atol(*argv);
-		if (!duplicated(*a, (int)nbr))
+		if (!duplicated(*a, (int)nbr) && nbr >= INT_MIN && nbr <= INT_MAX)
 			append_nbr(a, (int)nbr);
 		else
 		{
-			free_stack(*a);
+			free_stack(a);
 			break ;
 		}
 		argv++;
@@ -132,13 +130,49 @@ bool	duplicated(t_node *a, int nbr)
 	return (false);
 }
 
-void	free_stack(t_node *a)
+void	free_stack(t_node **a)
+{
+	t_node	*current;
+	t_node	*next;
+
+	current = *a;
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+	*a = NULL;
+}
+
+void	swap(t_node **a_or_b)
+{
+	t_node	*first;
+	t_node	*second;
+
+	if (*a_or_b == NULL || (*a_or_b)->next == NULL)
+		return ;
+	first = *a_or_b;
+	second = first->next;
+	first->next = second->next;
+	second->prev = first->prev;
+	if (first->next != NULL)
+		first->next->prev = first;
+	if (second->prev != NULL)
+		second->prev->next = second;
+	first->prev = second;
+	second->next = first;
+	*a_or_b = second; 
+}
+
+void	print_stack(t_node **a)
 {
 	t_node *temp;
-	while (a)
+	temp = *a;
+	while (*a)
 	{
-		temp = a->next;
-		free(a);
-		a = temp;
+		ft_printf("%d\n", (*a)->nbr);
+		*a = (*a)->next;
 	}
+	*a = temp;
 }
