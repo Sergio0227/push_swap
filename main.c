@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:26:56 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/16 15:42:58 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:29:19 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_node	*a;
 	t_node	*b;
-	int 	nb_elements;
+	int		nb_elements;
 
 	a = NULL;
 	b = NULL;
@@ -52,8 +52,7 @@ int	arg_error(char **argv, int argc)
 			i = 0;
 			while (argv[x][i])
 			{
-				if (argv[x][i] == 32 && argv[x][i] != '+'
-					&& argv[x][i] != '-')
+				if (argv[x][i] == 32 && argv[x][i] != '+' && argv[x][i] != '-')
 				{
 					ft_printf("Error\n");
 					return (1);
@@ -99,7 +98,7 @@ int	init_a(t_node **a, char **argv)
 	while (*argv)
 	{
 		nbr = ft_atol(*argv);
-		if (!duplicated(*a, (int)nbr) && nbr >= INT_MIN && nbr <= INT_MAX)
+		if (!duplicated(*a, (int)nbr) && (nbr >= INT_MIN && nbr <= INT_MAX))
 			append_nbr(a, (int)nbr, index);
 		else
 		{

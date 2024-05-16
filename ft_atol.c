@@ -6,11 +6,11 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 15:12:43 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/16 14:51:47 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:28:24 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "push_swap.h"
 
 long	ft_atol(const char *nptr)
 {
@@ -28,7 +28,7 @@ long	ft_atol(const char *nptr)
 		nptr++;
 	}
 	if (!ft_isdigit(*nptr))
-		return (__LONG_MAX__);
+		return (UINT_MAX);
 	while (ft_isdigit(*nptr))
 	{
 		result *= 10;
