@@ -1,5 +1,8 @@
 SRC = 	main.c \
-		ft_atol.c
+		ft_atol.c \
+		swap.c \
+		push.c \
+		sort.c
 		
 NAME = push_swap
 OBJS = ${SRC:.c=.o}

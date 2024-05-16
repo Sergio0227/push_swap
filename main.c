@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:26:56 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/08 21:17:07 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:42:58 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,51 @@ int	main(int argc, char **argv)
 {
 	t_node	*a;
 	t_node	*b;
+	int 	nb_elements;
 
 	a = NULL;
 	b = NULL;
-	if (argc < 2 || argc == 2 && !argv[1][0])
+	if (arg_error(argv, argc))
 		return (1);
 	else if (argc == 2)
 		argv = ft_split(argv[1], ' ');
 	else
 		del_args(argv, argc, 0);
-	init_a(&a, argv);
+	nb_elements = init_a(&a, argv);
 	if (argc == 2)
 		del_args(argv, argc, 1);
-	print_stack(&a);
-	swap(&a);
-	print_stack(&a);
+	if (!sorted(a))
+		sort(&a, &b, nb_elements);
 	free_stack(&a);
+	return (0);
+}
+
+int	arg_error(char **argv, int argc)
+{
+	int	i;
+	int	x;
+
+	if (argc < 2 || argc == 2 && !argv[1][0])
+	{
+		ft_printf("Error\n");
+		return (1);
+	}
+	x = 0;
+	if (argc > 2)
+		while (argv[++x])
+		{
+			i = 0;
+			while (argv[x][i])
+			{
+				if (argv[x][i] == 32 && argv[x][i] != '+'
+					&& argv[x][i] != '-')
+				{
+					ft_printf("Error\n");
+					return (1);
+				}
+				i++;
+			}
+		}
 	return (0);
 }
 
@@ -61,25 +90,30 @@ void	del_args(char **argv, int argc, int flag)
 	}
 }
 
-void	init_a(t_node **a, char **argv)
+int	init_a(t_node **a, char **argv)
 {
 	long	nbr;
+	int		index;
 
+	index = 0;
 	while (*argv)
 	{
 		nbr = ft_atol(*argv);
 		if (!duplicated(*a, (int)nbr) && nbr >= INT_MIN && nbr <= INT_MAX)
-			append_nbr(a, (int)nbr);
+			append_nbr(a, (int)nbr, index);
 		else
 		{
+			ft_printf("Error\n");
 			free_stack(a);
 			break ;
 		}
 		argv++;
+		index++;
 	}
+	return (index);
 }
 
-void	append_nbr(t_node **a, int nbr)
+void	append_nbr(t_node **a, int nbr, int index)
 {
 	t_node	*new;
 	t_node	*last;
@@ -89,10 +123,17 @@ void	append_nbr(t_node **a, int nbr)
 	if (!new)
 		return ;
 	new->nbr = nbr;
+	new->init_index = index;
 	if (!last)
+	{
+		new->prev = NULL;
 		*a = new;
+	}
 	else
+	{
+		new->prev = last;
 		last->next = new;
+	}
 	new->next = NULL;
 }
 
@@ -145,34 +186,13 @@ void	free_stack(t_node **a)
 	*a = NULL;
 }
 
-void	swap(t_node **a_or_b)
-{
-	t_node	*first;
-	t_node	*second;
-
-	if (*a_or_b == NULL || (*a_or_b)->next == NULL)
-		return ;
-	first = *a_or_b;
-	second = first->next;
-	first->next = second->next;
-	second->prev = first->prev;
-	if (first->next != NULL)
-		first->next->prev = first;
-	if (second->prev != NULL)
-		second->prev->next = second;
-	first->prev = second;
-	second->next = first;
-	*a_or_b = second; 
-}
-
-void	print_stack(t_node **a)
+void	print_stack(t_node *a)
 {
 	t_node *temp;
-	temp = *a;
-	while (*a)
+	temp = a;
+	while (a)
 	{
-		ft_printf("%d\n", (*a)->nbr);
-		*a = (*a)->next;
+		ft_printf("%d\n", a->nbr);
+		a = a->next;
 	}
-	*a = temp;
 }
