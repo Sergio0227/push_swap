@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:26:56 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/17 19:22:52 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/18 13:11:50 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,15 @@ void	del_args(char **argv, int argc, int flag)
 	}
 }
 
-int	init_a(t_node **a, char **argv)
+void	init_a(t_node **a, char **argv)
 {
 	long	nbr;
-	int		index;
 
-	index = 0;
 	while (*argv)
 	{
 		nbr = ft_atol(*argv);
 		if (!duplicated(*a, (int)nbr) && (nbr >= INT_MIN && nbr <= INT_MAX))
-			append_nbr(a, (int)nbr, index);
+			append_nbr(a, (int)nbr);
 		else
 		{
 			ft_printf("Error\n");
@@ -107,12 +105,10 @@ int	init_a(t_node **a, char **argv)
 			break ;
 		}
 		argv++;
-		index++;
 	}
-	return (index);
 }
 
-void	append_nbr(t_node **a, int nbr, int index)
+void	append_nbr(t_node **a, int nbr)
 {
 	t_node	*new;
 	t_node	*last;
@@ -122,10 +118,10 @@ void	append_nbr(t_node **a, int nbr, int index)
 	if (!new)
 		return ;
 	new->nbr = nbr;
-	new->init_index = index;
 	if (!last)
 	{
 		new->prev = NULL;
+		new->max_num = nbr;
 		*a = new;
 	}
 	else
