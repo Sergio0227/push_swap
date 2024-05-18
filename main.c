@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:26:56 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/18 13:11:50 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/18 16:08:14 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ void	append_nbr(t_node **a, int nbr)
 	if (!last)
 	{
 		new->prev = NULL;
-		new->max_num = nbr;
 		*a = new;
 	}
 	else
@@ -190,4 +189,36 @@ void	print_stack(t_node *a)
 			ft_printf(" ");
 		a = a->next;
 	}
+}
+
+t_node	*get_min(t_node *a_or_b)
+{
+	t_node	*min_node;
+
+	if (!a_or_b)
+		return (NULL);
+	min_node = a_or_b;
+	while (a_or_b)
+	{
+		if (a_or_b->nbr < min_node->nbr)
+			min_node = a_or_b;
+		a_or_b = a_or_b->next;
+	}
+	return (min_node);
+}
+
+t_node	*get_max(t_node *a_or_b)
+{
+	t_node *max_node;
+
+	if (!a_or_b)
+		return (NULL);
+	max_node = a_or_b;
+	while (a_or_b)
+	{
+		if (a_or_b->nbr > max_node->nbr)
+			max_node = a_or_b;
+		a_or_b = a_or_b->next;
+	}
+	return (max_node);
 }

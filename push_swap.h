@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:27:11 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/18 13:43:06 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/18 16:19:22 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int					arg_error(char **argv, int argc);
 void				sort(t_node **a, t_node **b);
 void				sort_rest(t_node **a, t_node **b);
 void				sort_three(t_node **a);
-void				sort_five(t_node **a);
+t_node				*get_min(t_node *a_or_b);
+t_node				*get_max(t_node *a_or_b);
 void				sa(t_node **a);
 void				sb(t_node **b);
 void				ss(t_node **a, t_node **b);
