@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:26:56 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/16 18:55:40 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:22:52 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	main(int argc, char **argv)
 {
 	t_node	*a;
 	t_node	*b;
-	int		nb_elements;
 
 	a = NULL;
 	b = NULL;
@@ -26,11 +25,12 @@ int	main(int argc, char **argv)
 		argv = ft_split(argv[1], ' ');
 	else
 		del_args(argv, argc, 0);
-	nb_elements = init_a(&a, argv);
+	init_a(&a, argv);
 	if (argc == 2)
 		del_args(argv, argc, 1);
 	if (!sorted(a))
-		sort(&a, &b, nb_elements);
+		sort(&a, &b);
+	print_stack(a);
 	free_stack(&a);
 	return (0);
 }
@@ -117,7 +117,7 @@ void	append_nbr(t_node **a, int nbr, int index)
 	t_node	*new;
 	t_node	*last;
 
-	last = get_last_nbr(*a);
+	last = last_node(*a);
 	new = malloc(sizeof(t_node));
 	if (!new)
 		return ;
@@ -136,13 +136,13 @@ void	append_nbr(t_node **a, int nbr, int index)
 	new->next = NULL;
 }
 
-t_node	*get_last_nbr(t_node *a)
+t_node	*last_node(t_node *a_or_b)
 {
-	if (!a)
+	if (!a_or_b)
 		return (NULL);
-	while (a->next)
-		a = a->next;
-	return (a);
+	while (a_or_b->next)
+		a_or_b = a_or_b->next;
+	return (a_or_b);
 }
 
 bool	sorted(t_node *a)
@@ -187,11 +187,11 @@ void	free_stack(t_node **a)
 
 void	print_stack(t_node *a)
 {
-	t_node *temp;
-	temp = a;
 	while (a)
 	{
-		ft_printf("%d\n", a->nbr);
+		ft_printf("%d", a->nbr);
+		if (a->next)
+			ft_printf(" ");
 		a = a->next;
 	}
 }
