@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:27:11 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/18 16:19:22 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:00:59 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@
 typedef struct s_node
 {
 	int				nbr;
-	int				init_index;
-	struct s_node	*target_node;
+	int				bits;
 	struct s_node	*next;
 	struct s_node	*prev;
 }					t_node;
@@ -41,6 +40,9 @@ void				sort_rest(t_node **a, t_node **b);
 void				sort_three(t_node **a);
 t_node				*get_min(t_node *a_or_b);
 t_node				*get_max(t_node *a_or_b);
+void				radix_sort(t_node **stack_a, t_node **stack_b);
+int					get_max_bits(t_node **a_or_b);
+int					count_nodes(t_node *a);
 void				sa(t_node **a);
 void				sb(t_node **b);
 void				ss(t_node **a, t_node **b);

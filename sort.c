@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:31:44 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/18 16:19:44 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/20 19:30:34 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ int	count_nodes(t_node *a)
 	return (count);
 }
 
-void	sort(t_node **a, t_node **b)
+void	sort(t_node **a, t_node **b, int *bits)
 {
 	if (count_nodes(*a) <= 3)
 		sort_three(a);
-	sort_rest(a, b);
+	else
+		radix_sort(a, b);
 }
 
 void	sort_three(t_node **a)
@@ -46,18 +47,29 @@ void	sort_three(t_node **a)
 		sa(a);
 }
 
-void	sort_rest(t_node **a, t_node **b)
+void	sort_rest(t_node **a, t_node **b, int *bits)
 {
 	t_node	*min;
 	t_node	*max;
+	int		min_bits;
+	int		max_bits;
 
 	max = get_max(*a);
 	min = get_min(*a);
-	while (count_nodes(*a) > 2)
+	min_bits = 0;
+	while (count_nodes(*a))
 	{
-		if ((*a)->nbr != min->nbr && (*a)->nbr != max->nbr)
-			pb(a, b);
-		else
-			ra(a);
+		while (bits[min_bits])
+		{
+			if ((*a)->bits == min_bits)
+			{
+				pb(a, b);
+				bits[min_bits]--;
+			}
+			else
+				ra(a);
+		}
+		min_bits++;
 	}
+	radix_sort(a, b);
 }

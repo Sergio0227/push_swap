@@ -4,8 +4,9 @@ SRC = 	main.c \
 		push.c \
 		sort.c \
 		rotate.c \
-		rev_rotate.c
-		
+		rev_rotate.c \
+		radix.c
+				
 NAME = push_swap
 OBJS = ${SRC:.c=.o}
 CC		= cc

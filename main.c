@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:26:56 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/18 16:08:14 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:01:44 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main(int argc, char **argv)
 		del_args(argv, argc, 1);
 	if (!sorted(a))
 		sort(&a, &b);
-	print_stack(a);
 	free_stack(&a);
 	return (0);
 }
@@ -107,6 +106,7 @@ void	init_a(t_node **a, char **argv)
 		argv++;
 	}
 }
+
 
 void	append_nbr(t_node **a, int nbr)
 {

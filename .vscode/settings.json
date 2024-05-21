@@ -2,8 +2,30 @@
 	"files.associations": {
 		"libft.h": "c",
 		"get_next_line.h": "c",
-		"safe_malloc.h": "c",
 		"unistd.h": "c",
-		"push_swap.h": "c"
+		"push_swap.h": "c",
+		"*.tcc": "c",
+		"bitset": "c",
+		"chrono": "c",
+		"list": "c",
+		"unordered_map": "c",
+		"memory_resource": "c",
+		"algorithm": "c",
+		"functional": "c",
+		"memory": "c",
+		"random": "c",
+		"fstream": "c",
+		"future": "c",
+		"initializer_list": "c",
+		"istream": "c",
+		"numeric": "c",
+		"streambuf": "c",
+		"cmath": "c",
+		"regex": "c",
+		"tuple": "c",
+		"utility": "c",
+		"type_traits": "c",
+		"typeinfo": "c",
+		"variant": "c"
 	}
 }
