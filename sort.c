@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:31:44 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/23 19:42:39 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/23 21:47:37 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,39 +130,22 @@ int	count_nodes(t_node *a)
 	return (count);
 }
 
-void	sort_rest(t_node **a, t_node **b)
+void	push_back(t_node **a, t_node **b)
 {
-	int nodes;
 	int	*arr;
-	int	above_below;
-
-	while (count_nodes(*a) != 2)
-	{
-		arr = copy_and_sort(*a);
-		above_below = set_below_median(*a, get_median(arr, count_nodes(*a)));
-		while (above_below)
-		{				
-			if ((*a)->above_medium == false)
-			{
-				above_below--;
-				pb(a, b);
-			}
-			else
-				ra(a);
-		}
-	}
+	int	above;
+	
 	if (!sorted(*a))
 		sa(a);
-	nodes = count_nodes(*b);
-	while (nodes)
+	while (count_nodes(*b))
 	{
 		arr = copy_and_sort(*b);
-		above_below = set_above_median(*b, get_median(arr, count_nodes(*b)));
-		while (above_below)
+		above = set_above_median(*b, get_median(arr, count_nodes(*b)));
+		while (above)
 		{
 			if ((*b)->above_medium == true)
 			{
-				above_below--;
+				above--;
 				pa(a, b);
 			}
 			else
@@ -173,11 +156,30 @@ void	sort_rest(t_node **a, t_node **b)
 
 void	sort(t_node **a, t_node **b)
 {
+	int	*arr;
+	int	below;
+
 	if (count_nodes(*a) <= 3)
 		sort_three(a);
 	else
 	{
-		sort_rest(a, b);
+		while (count_nodes(*a) != 2)
+		{
+			arr = copy_and_sort(*a);
+			below = set_below_median(*a, get_median(arr,
+						count_nodes(*a)));
+			while (below)
+			{
+				if ((*a)->above_medium == false)
+				{
+					below--;
+					pb(a, b);
+				}
+				else
+					ra(a);
+			}
+		}
+		push_back(a, b);
 	}
 }
 

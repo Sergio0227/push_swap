@@ -5,7 +5,6 @@ SRC = 	main.c \
 		sort.c \
 		rotate.c \
 		rev_rotate.c \
-		radix.c \
 		utils.c
 				
 NAME = push_swap

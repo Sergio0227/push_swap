@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:27:11 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/23 18:18:39 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/23 21:45:47 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,10 @@ void				free_stack(t_node **a);
 void				print_stack(t_node *a);
 int					arg_error(char **argv, int argc);
 void				sort(t_node **a, t_node **b);
-void				sort_rest(t_node **a, t_node **b);
+void				push_back(t_node **a, t_node **b);
 void				sort_three(t_node **a);
-void				radix_sort(t_node **stack_a, t_node **stack_b);
 void				bubbleSort(int *arr, int n);
 int					*copy_and_sort(t_node *a);
-int					get_max_bits(t_node **a_or_b);
 int					get_median(int *arr, int size);
 int					set_below_median(t_node *a, int median);
 int					set_above_median(t_node *a, int median);
