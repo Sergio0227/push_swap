@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:58:27 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/17 15:34:18 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/21 19:10:12 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	rrb(t_node **b)
 	if (rev_rotate(b))
 		ft_printf("rrb\n");
 }
+
 void	rrr(t_node **a, t_node **b)
 {
 	if (rev_rotate(a) && rev_rotate(b))

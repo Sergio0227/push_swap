@@ -6,11 +6,24 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:31:44 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/20 19:30:34 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/21 19:12:09 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+bool	sorted(t_node *a)
+{
+	if (!a)
+		return (-1);
+	while (a->next)
+	{
+		if (a->nbr > a->next->nbr)
+			return (false);
+		a = a->next;
+	}
+	return (true);
+}
 
 int	count_nodes(t_node *a)
 {
@@ -25,7 +38,7 @@ int	count_nodes(t_node *a)
 	return (count);
 }
 
-void	sort(t_node **a, t_node **b, int *bits)
+void	sort(t_node **a, t_node **b)
 {
 	if (count_nodes(*a) <= 3)
 		sort_three(a);
@@ -45,31 +58,4 @@ void	sort_three(t_node **a)
 	}
 	if ((*a)->nbr > (*a)->next->nbr)
 		sa(a);
-}
-
-void	sort_rest(t_node **a, t_node **b, int *bits)
-{
-	t_node	*min;
-	t_node	*max;
-	int		min_bits;
-	int		max_bits;
-
-	max = get_max(*a);
-	min = get_min(*a);
-	min_bits = 0;
-	while (count_nodes(*a))
-	{
-		while (bits[min_bits])
-		{
-			if ((*a)->bits == min_bits)
-			{
-				pb(a, b);
-				bits[min_bits]--;
-			}
-			else
-				ra(a);
-		}
-		min_bits++;
-	}
-	radix_sort(a, b);
 }

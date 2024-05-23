@@ -5,7 +5,8 @@ SRC = 	main.c \
 		sort.c \
 		rotate.c \
 		rev_rotate.c \
-		radix.c
+		radix.c \
+		utils.c
 				
 NAME = push_swap
 OBJS = ${SRC:.c=.o}
@@ -21,11 +22,11 @@ libft:
 	${MAKE} -C ${LIBFT_PATH}
 
 .c.o: 
-	${CC} -g -c $< -o ${<:.c=.o}
+	${CC} ${CFLAGS} -g -c $< -o ${<:.c=.o}
 
 
 push_swap: ${OBJS} libft
-	${CC} ${OBJS}  -o push_swap -L./libft -lft
+	${CC} ${CFLAGS} ${OBJS}  -o push_swap -L./libft -lft
 
 clean:
 	${MAKE} -C ${LIBFT_PATH} clean
