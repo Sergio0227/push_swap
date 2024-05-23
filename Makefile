@@ -22,7 +22,7 @@ libft:
 	${MAKE} -C ${LIBFT_PATH}
 
 .c.o: 
-	${CC} ${CFLAGS} -g -c $< -o ${<:.c=.o}
+	${CC}  -g -c $< -o ${<:.c=.o}
 
 
 push_swap: ${OBJS} libft

@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:26:56 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/23 14:20:53 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:46:48 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,19 @@ int	arg_error(char **argv, int argc)
 	}
 	x = 0;
 	if (argc > 2)
-	{
 		while (argv[++x])
 		{
 			i = 0;
-			while (argv[x][i++])
+			while (argv[x][i])
 			{
 				if (argv[x][i] == 32 && argv[x][i] != '+' && argv[x][i] != '-')
 				{
 					ft_printf("Error\n");
 					return (1);
 				}
+				i++;
 			}
 		}
-	}
 	return (0);
 }
 
@@ -92,6 +91,7 @@ void	del_args(char **argv, int flag)
 void	init_a(t_node **a, char **argv)
 {
 	long	nbr;
+	int		*arr;
 
 	while (*argv)
 	{
@@ -106,4 +106,6 @@ void	init_a(t_node **a, char **argv)
 		}
 		argv++;
 	}
+	arr = copy_and_sort(*a);
+	set_median(*a, get_median(arr, count_nodes(*a)));
 }

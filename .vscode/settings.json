@@ -26,6 +26,7 @@
 		"utility": "c",
 		"type_traits": "c",
 		"typeinfo": "c",
-		"variant": "c"
+		"variant": "c",
+		"limits.h": "c"
 	}
 }
