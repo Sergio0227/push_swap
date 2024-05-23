@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:26:56 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/23 16:46:48 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/23 18:03:19 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	del_args(char **argv, int flag)
 void	init_a(t_node **a, char **argv)
 {
 	long	nbr;
-	int		*arr;
 
 	while (*argv)
 	{
@@ -106,6 +105,4 @@ void	init_a(t_node **a, char **argv)
 		}
 		argv++;
 	}
-	arr = copy_and_sort(*a);
-	set_median(*a, get_median(arr, count_nodes(*a)));
 }

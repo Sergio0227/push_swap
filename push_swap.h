@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:27:11 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/23 16:39:07 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/23 18:18:39 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void				bubbleSort(int *arr, int n);
 int					*copy_and_sort(t_node *a);
 int					get_max_bits(t_node **a_or_b);
 int					get_median(int *arr, int size);
-void				set_median(t_node *a, int median);
+int					set_below_median(t_node *a, int median);
+int					set_above_median(t_node *a, int median);
 int					count_nodes(t_node *a);
 void				sa(t_node **a);
 void				sb(t_node **b);

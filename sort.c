@@ -6,7 +6,7 @@
 /*   By: sandre-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:31:44 by sandre-a          #+#    #+#             */
-/*   Updated: 2024/05/23 16:48:04 by sandre-a         ###   ########.fr       */
+/*   Updated: 2024/05/23 19:42:39 by sandre-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,52 @@
 
 int	get_median(int *arr, int size)
 {
+	int	result;
+
 	if (size % 2 == 0)
-		return ((arr[size / 2 - 1] + arr[size / 2]) / 2);
+		result = ((arr[size / 2 - 1] + arr[size / 2]) / 2);
 	else
-		return (arr[size / 2]);
+		result = (arr[size / 2]);
+	free(arr);
+	return (result);
 }
 
-void	set_median(t_node *a, int median)
+int	set_below_median(t_node *a, int median)
 {
+	int	below;
+
+	below = 0;
 	while (a)
 	{
 		if (a->nbr >= median)
 			a->above_medium = true;
 		else
+		{
+			a->above_medium = false;
+			below++;
+		}
+		a = a->next;
+	}
+	return (below);
+}
+
+int	set_above_median(t_node *a, int median)
+{
+	int	above;
+
+	above = 0;
+	while (a)
+	{
+		if (a->nbr >= median)
+		{
+			a->above_medium = true;
+			above++;
+		}
+		else
 			a->above_medium = false;
 		a = a->next;
 	}
+	return (above);
 }
 
 void	bubbleSort(int *arr, int n)
@@ -100,19 +130,54 @@ int	count_nodes(t_node *a)
 	return (count);
 }
 
+void	sort_rest(t_node **a, t_node **b)
+{
+	int nodes;
+	int	*arr;
+	int	above_below;
+
+	while (count_nodes(*a) != 2)
+	{
+		arr = copy_and_sort(*a);
+		above_below = set_below_median(*a, get_median(arr, count_nodes(*a)));
+		while (above_below)
+		{				
+			if ((*a)->above_medium == false)
+			{
+				above_below--;
+				pb(a, b);
+			}
+			else
+				ra(a);
+		}
+	}
+	if (!sorted(*a))
+		sa(a);
+	nodes = count_nodes(*b);
+	while (nodes)
+	{
+		arr = copy_and_sort(*b);
+		above_below = set_above_median(*b, get_median(arr, count_nodes(*b)));
+		while (above_below)
+		{
+			if ((*b)->above_medium == true)
+			{
+				above_below--;
+				pa(a, b);
+			}
+			else
+				rb(b);
+		}
+	}
+}
+
 void	sort(t_node **a, t_node **b)
 {
 	if (count_nodes(*a) <= 3)
 		sort_three(a);
 	else
 	{
-		while (*a)
-		{
-			if ((*a)->above_medium)
-                pb(a, b);
-            else
-                ra(a);
-		}
+		sort_rest(a, b);
 	}
 }
 
